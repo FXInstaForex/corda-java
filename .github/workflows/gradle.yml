@@ -15,6 +15,10 @@ on:
 
 permissions:
   contents: read
+  
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   build:
@@ -39,8 +43,8 @@ jobs:
       with:
         image: wfsettlement/corda-java
         registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
 
     - name: Deploy to Azure VM
       uses: appleboy/ssh-action@master
@@ -48,6 +52,7 @@ jobs:
         host: ${{ secrets.AZ_VM_IP }}
         username: ${{ secrets.AZ_VM_USERNAME }}
         key: ${{ secrets.VM_SSH_PRIVATE_KEY }}
+        port: 22
         script: |
           eval "$(ssh-agent)"
           ssh-add - <<<"${{ secrets.VM_SSH_PRIVATE_KEY }}"
