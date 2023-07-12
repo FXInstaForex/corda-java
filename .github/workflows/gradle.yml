@@ -41,3 +41,16 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Deploy to Azure VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AZ_VM_IP }}
+        username: ${{ secrets.AZ_VM_USERNAME }}
+        key: ${{ secrets.VM_SSH_PRIVATE_KEY }}
+        script: |
+          eval "$(ssh-agent)"
+          ssh-add - <<<"${{ secrets.VM_SSH_PRIVATE_KEY }}"
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker pull wfsettlement/corda-java:latest
+          docker run -d -p 5000:5000 wfsettlement/corda-java:latest
