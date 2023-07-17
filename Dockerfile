@@ -1,6 +1,8 @@
+FROM ubuntu:latest
+RUN mkdir -p /usr/app/PartyA
+
 #Build stage
 FROM gradle:latest AS BUILD
-RUN mkdir -p /usr/app/PartyA
 RUN gradle init
 WORKDIR /usr/app/
 COPY . . 
