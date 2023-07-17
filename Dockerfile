@@ -1,4 +1,4 @@
-ARG BUILD_HOME=/gradle-docker-example
+ARG BUILD_HOME=/corda-java
 
 #
 # Gradle image for the build stage.
