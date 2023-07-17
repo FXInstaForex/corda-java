@@ -51,4 +51,3 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker pull wfsettlement/corda-java:latest
           docker run -d -p 5000:5000 wfsettlement/corda-java:latest
-		  
