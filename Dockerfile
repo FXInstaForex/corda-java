@@ -1,3 +1,5 @@
+RUN mkdir -p /usr/app/
+
 FROM gradle:latest AS TEMP_BUILD_IMAGE
 ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
