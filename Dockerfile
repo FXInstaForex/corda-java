@@ -1,6 +1,5 @@
-RUN mkdir -p /usr/app/
-
 FROM gradle:latest AS TEMP_BUILD_IMAGE
+RUN mkdir -p /usr/app/
 ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
 COPY build.gradle settings.gradle $APP_HOME
