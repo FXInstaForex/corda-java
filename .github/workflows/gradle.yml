@@ -28,7 +28,9 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
-
+    - name: Create home dir
+      run: |
+        mkdir -p /usr/app/PartyA
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
